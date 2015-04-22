@@ -11,4 +11,6 @@ public interface CategoryDao {
   Category findById(Integer id);
 
   Category update(Category category);
+
+  Category create(Category category);
 }

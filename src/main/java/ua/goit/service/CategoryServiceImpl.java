@@ -1,5 +1,6 @@
 package ua.goit.service;
 
+import ua.goit.dao.CategoryDao;
 import ua.goit.model.Category;
 
 import java.util.ArrayList;
@@ -7,12 +8,11 @@ import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
 
-  ArrayList<Category> categories = new ArrayList<Category>() {
-    {
-      add(new Category(1, "Music"));
-      add(new Category(2, "IT"));
-    }
-  };
+  private final CategoryDao categoryDao;
+
+  public CategoryServiceImpl(CategoryDao categoryDao) {
+    this.categoryDao = categoryDao;
+  }
 
   @Override
   public Category update(Category category) {
@@ -21,13 +21,11 @@ public class CategoryServiceImpl implements CategoryService {
 
   @Override
   public List<Category> findAll() {
-
-    return categories;
+    return categoryDao.findAll();
   }
 
   @Override
   public Category create(Category category) {
-    categories.add(category);
-    return category;
+    return categoryDao.create(category);
   }
 }

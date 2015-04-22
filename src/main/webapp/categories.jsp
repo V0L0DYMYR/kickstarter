@@ -1,50 +1,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <style>
-        .menu {
-            background-color: cadetblue;
-            height: 100%;
-        }
-    </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <style>
+
+    .row {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .side-menu .navbar-nav {
+      height: 100%;
+    }
+
+    .side-menu .navbar-nav li {
+      display: block;
+      width: 100%;
+    }
+
+  </style>
 </head>
 <body>
 
 <div class="container">
 
-
-    <div class="row">
-
-
-    <div class="col-md-3">
-        <ul class=" nav nav-pills list-unstyled">
-            <li><a href="#"><i class="glyphicon glyphicon-eur"></i>Create new category</a></li>
-            <li><a href="#">View all categories</a></li>
-        </ul>
+  <div class="row">
+    <div class="jumbotron">
+      <h1>Welcome to kickstarter!</h1>
+      <p>...</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
     </div>
+  </div>
 
-    <div class="col-md-9">
-        <ul class="list-unstyled">
-            <c:forEach var="c" items="${categories}">
-                <li><c:out value="${c.name}"/></li>
-            </c:forEach>
-        </ul>
+  <div class="row">
 
+    <c:forEach var="c" items="${categories}">
 
-        <div>
-            <form action="/servlet/category" method="POST">
-                <input type="text" name="category_name">
-
-                <button class="btn btn-default" type="submit">Submit</button>
-            </form>
-
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <a href="#">
+            <div class="caption">
+              <h3><c:out value="${c.name}"/></h3>
+            </div>
+          </a>
         </div>
-    </div>
-    </div>
+      </div>
 
+    </c:forEach>
+
+  </div>
 </div>
-
 
 </body>
 </html>
