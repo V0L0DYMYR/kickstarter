@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
   <style>
 
     .row {
@@ -21,6 +21,8 @@
   </style>
 </head>
 <body>
+
+<%@include file="head.jsp"%>
 
 <div class="container">
 

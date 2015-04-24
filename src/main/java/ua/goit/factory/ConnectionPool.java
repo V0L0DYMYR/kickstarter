@@ -1,16 +1,22 @@
 package ua.goit.factory;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConnectionPool {
 
-  public ConnectionPool(int size) {
+  private static List<Connection> connections = new ArrayList<>();
 
+  public ConnectionPool(int size) {
+  }
+  static {
+    connections.add(Factory.getConnection());
   }
 
 
   public static Connection getConnection() {
-    return null;
+    return connections.get(0);
   }
 
   public static void release(Connection con) {

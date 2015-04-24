@@ -6,12 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDaoImpl implements CategoryDao {
+public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDao {
 
-  private final Connection connection;
 
   public CategoryDaoImpl(Connection connection) {
-    this.connection = connection;
+    super(connection);
   }
 
   @Override
@@ -53,5 +52,10 @@ public class CategoryDaoImpl implements CategoryDao {
       throw new RuntimeException(e);
     }
     return category;
+  }
+
+  @Override
+  public Category delete(Category category) {
+    throw new UnsupportedOperationException();
   }
 }

@@ -4,13 +4,7 @@ import ua.goit.model.Category;
 
 import java.util.List;
 
-public interface CategoryDao {
+public interface CategoryDao extends GenericDao<Category> {
 
   List<Category> findAll();
-
-  Category findById(Integer id);
-
-  Category update(Category category);
-
-  Category create(Category category);
 }

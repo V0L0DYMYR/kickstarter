@@ -1,10 +1,10 @@
 package ua.goit.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import ua.goit.servlet.Request;
+import ua.goit.view.ViewModel;
 
-public interface Controller<T> {
+public interface Controller {
 
-  T process(HttpServletRequest req, HttpServletResponse resp);
+  ViewModel process(Request request);
 
 }
