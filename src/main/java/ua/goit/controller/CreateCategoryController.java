@@ -32,7 +32,6 @@ public class CreateCategoryController implements Controller {
     }
 
     List<Category> categories = service.findAll();
-    return vm
-        .withAttribute("categories", categories);
+    return vm.withAttribute("categories", categories);
   }
 }

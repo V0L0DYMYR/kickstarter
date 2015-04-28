@@ -11,11 +11,13 @@ import java.util.Properties;
 
 public class MailService {
 
-  private final Properties props;
+  private final  Properties props;
   private final String username;
   private final String password;
 
   public MailService() {
+
+
     props = System.getProperties();
     props.put("mail.transport.protocol", "smtp");
     props.put("mail.smtp.auth", "true");
