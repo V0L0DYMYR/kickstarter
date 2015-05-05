@@ -7,6 +7,7 @@ import ua.goit.factory.Factory;
 import ua.goit.view.ViewModel;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,9 @@ public class FrontServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     super.init();
-    Controller getAllCategoriesCtrl =
-        Factory.createCategoryController(GetAllCategoriesController.class, ConnectionPool.getConnection());
+    ServletContext context = getServletContext();
+
+    Controller getAllCategoriesCtrl = (Controller)context.getAttribute("getAllCategoryController");
 
     Controller createCategoryCtrl =
         Factory.createCategoryController(GetAllCategoriesController.class, ConnectionPool.getConnection());
@@ -54,10 +56,14 @@ public class FrontServlet extends HttpServlet {
     try {
 
       Controller controller = controllerMap.get(request);
+      logger.trace(String.format("request [%s] handled by [%s] controller.",
+          request, controller));
+
       if (controller == null) {
         throw new RuntimeException("Can not handle " + request);
       }
       ViewModel vm = controller.process(request);
+      logger.trace(vm);
 
       if (vm.hasCookies()) {
         Map<String, String> newCookies = vm.getNewCookies();
@@ -68,7 +74,7 @@ public class FrontServlet extends HttpServlet {
 
       forward(req, resp, vm);
     } catch (Throwable t) {
-      logger.error("error", t);
+      logger.warn(t);
       ViewModel vm = new ErrorController().process(request);
       vm.withAttribute("error", t.getClass() + " " + t.getMessage());
       forward(req, resp, vm);

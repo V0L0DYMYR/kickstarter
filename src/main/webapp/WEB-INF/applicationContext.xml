@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean class="org.springframework.web.context.support.ServletContextAttributeExporter">
+    <property name="attributes">
+      <map>
+        <entry key="getAllCategoryController" value-ref="getAllCategoryController"/>
+      </map>
+    </property>
+  </bean>
+
+
+
+  <bean name="getAllCategoryController" class="ua.goit.controller.GetAllCategoriesController">
+    <constructor-arg>
+      <ref bean="categoryService"/>
+    </constructor-arg>
+  </bean>
+
+  <bean name="categoryService" class="ua.goit.service.CategoryServiceImpl">
+    <constructor-arg>
+      <ref bean="categoryDao"/>
+    </constructor-arg>
+  </bean>
+
+  <bean id="categoryDao" class="ua.goit.dao.CategoryDaoImpl">
+    <constructor-arg>
+      <ref bean="connection"/>
+    </constructor-arg>
+  </bean>
+
+  <bean id="connection" class="ua.goit.factory.Factory" factory-method="getConnection"/>
+
+</beans>

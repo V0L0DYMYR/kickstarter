@@ -1,5 +1,7 @@
 package ua.goit.view;
 
+import com.google.common.base.MoreObjects;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,5 +44,13 @@ public class ViewModel {
 
   public Map<String, String> getNewCookies() {
     return newCookie;
+  }
+
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(this)
+        .add("view", view)
+        .add("attributes", attributes)
+        .toString();
   }
 }
