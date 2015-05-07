@@ -1,5 +1,6 @@
 package ua.goit.controller;
 
-public class ErrorController {
+public class UserController {
+
 
 }

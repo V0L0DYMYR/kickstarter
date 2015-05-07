@@ -8,10 +8,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.web.servlet.ModelAndView;
 import ua.goit.model.Category;
 import ua.goit.service.CategoryService;
-import ua.goit.servlet.Request;
-import ua.goit.view.ViewModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -31,7 +30,7 @@ public class CreateCategoryControllerTest {
   CategoryService mockService;
   @Captor
   ArgumentCaptor<Category> categoryCaptor;
-  CreateCategoryController controller;
+  CategoryController controller;
   Connection con;
   Savepoint savepoint;
 
@@ -45,7 +44,7 @@ public class CreateCategoryControllerTest {
   public void before() throws SQLException {
 //    savepoint = con.setSavepoint();
     MockitoAnnotations.initMocks(this);
-    controller = new CreateCategoryController(mockService);
+    controller = new CategoryController(mockService);
   }
 
   @After
@@ -56,10 +55,7 @@ public class CreateCategoryControllerTest {
   @Test
   public void verifyThatServiceCreateMethodInvoked() {
 
-    Map<String, String> params = new HashMap<>();
-    params.put("categoryName", "Music");
-
-    controller.process(new Request(params, "POST", "servlet/category"));
+    controller.createCategory("Music", null);
 
     verify(mockService).create(categoryCaptor.capture());
 
@@ -72,13 +68,14 @@ public class CreateCategoryControllerTest {
 
     Map<String, String> params = new HashMap<>();
     params.put("categoryName", "Music");
-    ViewModel vm = controller.process(new Request(params, "POST", "servlet/category"));
+    ModelAndView vm = controller.getAllCategories();
 
     List<Category> categories = new ArrayList<>();
 
     when(mockService.findAll()).thenReturn(categories);
 
-    assertEquals(vm.getAttribute("categories"), categories);
-    assertEquals(vm.getView(), "/categories.jsp");
+    Map<String, Object> model = vm.getModel();
+    assertEquals(model.get("categories"), categories);
+    assertEquals(vm.getView(), "categories");
   }
 }

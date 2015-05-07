@@ -1,6 +1,8 @@
 package ua.goit.service;
 
 import ua.goit.dao.CategoryDao;
+import ua.goit.dao.UserDao;
+import ua.goit.factory.Factory;
 import ua.goit.model.Category;
 
 import java.util.ArrayList;
@@ -9,9 +11,11 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
   private final CategoryDao categoryDao;
+  private UserDao userDao;
 
-  public CategoryServiceImpl(CategoryDao categoryDao) {
+  public CategoryServiceImpl(CategoryDao categoryDao, UserDao userDao) {
     this.categoryDao = categoryDao;
+    this.userDao = userDao;
   }
 
   @Override
