@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
+
+<%@include file="head.jsp"%>
+
 <div class="container">
   <div class="row">
     <div class="col-md-offset-4 col-md-4">

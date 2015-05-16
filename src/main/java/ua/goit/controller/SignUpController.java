@@ -20,6 +20,12 @@ public class SignUpController {
     this.service = service;
   }
 
+  @RequestMapping("/signup")
+  public ModelAndView signUp() {
+
+    return new ModelAndView("categories");
+  }
+
   @RequestMapping("/signup-form")
   public ModelAndView signUpForm() {
     return new ModelAndView("signup");

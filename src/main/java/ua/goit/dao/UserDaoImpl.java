@@ -1,27 +1,26 @@
 package ua.goit.dao;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ua.goit.model.User;
 
-import java.sql.*;
+import java.util.List;
 
+@Component("userDao")
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-  public UserDaoImpl(Connection connection) {
-    super(connection);
+  @Autowired
+  public UserDaoImpl(SessionFactory sessionFactory) {
+    super(sessionFactory, User.class);
   }
 
   @Override
   public User create(User user) {
-    try {
-      PreparedStatement statement =
-          connection.prepareStatement("insert into users(username, password, token) values(?,?,?)");
-      statement.setString(1, user.getUserName());
-      statement.setString(2, user.getPassword());
-      statement.setString(3, user.getToken());
-      statement.execute();
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+    sessionFactory.getCurrentSession()
+        .persist(user);
+
     return user;
   }
 
@@ -42,21 +41,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
   @Override
   public User findByToken(String token) {
-    User user = null;
-    try {
-      PreparedStatement stmt = connection.prepareStatement("select * from users where token = ?");
-      stmt.setString(1, token);
-      ResultSet rs = stmt.executeQuery();
-      rs.next();
+    List<User> users = sessionFactory.getCurrentSession()
+        .createCriteria(User.class)
+        .add(Restrictions.eq("token", token))
+        .list();
 
-      String username = rs.getString("username");
-      int id = rs.getInt("id");
-      user = User.from(id, username);
-
-
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-    return user;
+    return users.isEmpty() ? null : users.get(0);
   }
 }

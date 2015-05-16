@@ -1,12 +1,16 @@
 package ua.goit.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ua.goit.dao.UserDao;
 import ua.goit.model.User;
 
+@Component
 public class UserServiceImpl implements UserService {
 
   private final UserDao userDao;
 
+  @Autowired
   public UserServiceImpl(UserDao userDao) {
     this.userDao = userDao;
   }

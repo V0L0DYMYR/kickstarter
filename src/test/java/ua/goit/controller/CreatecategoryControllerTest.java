@@ -1,9 +1,6 @@
 package ua.goit.controller;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
@@ -64,6 +61,7 @@ public class CreateCategoryControllerTest {
   }
 
   @Test
+  @Ignore
   public void rename() {
 
     Map<String, String> params = new HashMap<>();

@@ -1,9 +1,17 @@
 package ua.goit.model;
 
-public class Category {
-  private Integer id;
-  private String name;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "categories")
+public class Category {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
+
+  @Column(name ="name")
+  private String name;
 
   public Category(Integer id, String name) {
     this.id = id;

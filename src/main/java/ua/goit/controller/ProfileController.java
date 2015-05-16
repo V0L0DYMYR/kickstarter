@@ -9,8 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProfileController {
 
-  @RequestMapping("/profile/{id}")
-  public ModelAndView process(@PathVariable("id") Integer id) {
+  @RequestMapping("/profile")
+  public ModelAndView process() {
 
     return new ModelAndView("profile");
   }

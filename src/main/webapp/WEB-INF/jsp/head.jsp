@@ -11,7 +11,7 @@
           </c:when>
 
           <c:otherwise>
-            <li><a href="/servlet/signup">Sign Up</a></li>
+            <li><a href="/servlet/signup-form">Sign Up</a></li>
           </c:otherwise>
         </c:choose>
 

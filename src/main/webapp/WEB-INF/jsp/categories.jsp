@@ -2,23 +2,6 @@
 <html>
 <head>
   <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <style>
-
-    .row {
-      margin-right: 0;
-      margin-left: 0;
-    }
-
-    .side-menu .navbar-nav {
-      height: 100%;
-    }
-
-    .side-menu .navbar-nav li {
-      display: block;
-      width: 100%;
-    }
-
-  </style>
 </head>
 <body>
 

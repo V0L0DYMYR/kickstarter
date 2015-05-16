@@ -1,7 +1,6 @@
 package ua.goit.servlet;
 
 import org.apache.log4j.Logger;
-import ua.goit.factory.Factory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -39,7 +38,8 @@ public class SystemPropertiesListener implements ServletContextListener {
       cxt = new InitialContext();
       if (cxt != null) {
         DataSource ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/PostgreSQLDS");
-        Factory.dataSource = ds;
+        // TODO
+        //Factory.dataSource = ds;
       }
     } catch (NamingException e) {
       logger.error(e);
